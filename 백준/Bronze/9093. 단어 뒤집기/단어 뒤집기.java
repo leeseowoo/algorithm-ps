@@ -1,28 +1,27 @@
 import java.io.*;
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int tc = Integer.parseInt(br.readLine());
+        int t = Integer.parseInt(br.readLine());
+        Deque<Character> stack = new ArrayDeque<>();
 
-        while (tc-- > 0) {
+        while (t-- > 0) {
+            String input = br.readLine() + "\n";
 
-            String str = br.readLine() + "\n";
-
-            Stack<Character> stack = new Stack<>();
-            for (char ch : str.toCharArray()) {
-                if (ch == ' ' || ch == '\n') {
-                    while (!stack.empty()) {
-                        bw.write(stack.pop());
+            for (char c : input.toCharArray()) {
+                if (c == ' ' || c == '\n') {
+                    while (!stack.isEmpty()) {
+                        bw.write(stack.pollFirst());
                     }
-                    bw.write(ch);
+                    bw.write(c);
 
                 } else {
-                    stack.push(ch);
+                    stack.offerFirst(c);
                 }
             }
         }
