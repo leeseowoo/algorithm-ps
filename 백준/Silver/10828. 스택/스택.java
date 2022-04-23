@@ -1,58 +1,65 @@
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int n = sc.nextInt();
-        int[] stack = new int[n];
-        int size = 0;
+        int n = Integer.parseInt(br.readLine());
+        Stack stack = new Stack();
 
         while (n-- > 0) {
-            String command = sc.next();
+            String[] command = br.readLine().split(" ");
 
-            switch (command) {
+            switch (command[0]) {
                 case "push":
-                    int number = Integer.parseInt(sc.next());
-                    stack[size++] = number;
+                    stack.push(Integer.parseInt(command[1]));
                     break;
-
                 case "pop":
-                    if (size == 0) {
-                        bw.write("-1\n");
-                    } else {
-                        bw.write(stack[size - 1] + "\n");
-                        size -= 1;
-                    }
+                    bw.write(stack.pop() + "\n");
                     break;
-
                 case "size":
-                    bw.write(size + "\n");
+                    bw.write(stack.size() + "\n");
                     break;
-
                 case "empty":
-                    if (size == 0) {
-                        bw.write("1\n");
-                    } else {
-                        bw.write("0\n");
-                    }
+                    bw.write(stack.isEmpty() + "\n");
                     break;
-
                 case "top":
-                    if (size == 0) {
-                        bw.write("-1\n");
-                    } else {
-                        bw.write(stack[size - 1] + "\n");
-                    }
+                    bw.write(stack.top() + "\n");
                     break;
             }
         }
 
         bw.flush();
+    }
+
+    static class Stack {
+        int[] stack;
+        int ptr;
+
+        public Stack() {
+            this.stack = new int[10000];
+            this.ptr = -1;
+        }
+
+        public void push(int n) {
+            this.stack[++ptr] = n;
+        }
+
+        public int pop() {
+            return isEmpty() == 1 ? -1 : stack[ptr--];
+        }
+
+        public int size() {
+            return ptr + 1;
+        }
+
+        public int isEmpty() {
+            return ptr == -1 ? 1 : 0;
+        }
+
+        public int top() {
+            return isEmpty() == 1 ? -1 : stack[ptr];
+        }
     }
 }
