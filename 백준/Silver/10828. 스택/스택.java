@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -9,11 +10,11 @@ public class Main {
         Stack stack = new Stack();
 
         while (n-- > 0) {
-            String[] command = br.readLine().split(" ");
+            StringTokenizer command = new StringTokenizer(br.readLine(), " ");
 
-            switch (command[0]) {
+            switch (command.nextToken()) {
                 case "push":
-                    stack.push(Integer.parseInt(command[1]));
+                    stack.push(Integer.parseInt(command.nextToken()));
                     break;
                 case "pop":
                     bw.write(stack.pop() + "\n");
