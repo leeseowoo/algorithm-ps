@@ -15,15 +15,15 @@ public class Main {
 
         dp[1] = wines[1];
 
-        if (n != 1) {
+        if (n > 1) {
             dp[2] = wines[1] + wines[2];
+        }
 
-            for (int i = 3; i <= n; i++) {
-                int first = wines[i] + wines[i-1] + dp[i-3];
-                int second = wines[i] + dp[i-2];
-                int third = dp[i - 1];
-                dp[i] = Math.max(Math.max(first, second), third);
-            }
+        for (int i = 3; i <= n; i++) {
+            int first = wines[i] + wines[i-1] + dp[i-3];
+            int second = wines[i] + dp[i-2];
+            int third = dp[i - 1];
+            dp[i] = Math.max(Math.max(first, second), third);
         }
 
         bw.write(dp[n] + "");
