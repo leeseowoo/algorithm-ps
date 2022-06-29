@@ -46,12 +46,3 @@ class Solution {
         return answer.toArray();
     }
 }
-
-
-
-// 1. 어떤 장르가 총 몇 회 재생됐나
-// 2. 장르별 노래 인덱스 관리
-
-// 1. plays 순회하면서 그때의 인덱스로 genres에서 장르 확인 -> Map에 장르 : 총 재생 횟수 저장
-// 2. Map에 장르 : ArrayList(해당 장르의 인덱스들)
-
