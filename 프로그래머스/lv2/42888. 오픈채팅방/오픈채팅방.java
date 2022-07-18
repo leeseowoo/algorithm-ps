@@ -12,7 +12,7 @@ class Solution {
         setNickname(record);
         getResult(record);
         
-        return result.toArray(new String[0]);
+        return result.toArray(new String[result.size()]);
     }
     
     public void setNickname(String[] record) {
@@ -26,7 +26,6 @@ class Solution {
     }
     
     public void getResult(String[] record) {
-        
         for(String i : record) {
             String[] data = i.split(" ");
             String nickname = nicknameMap.get(data[1]);
